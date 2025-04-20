@@ -7,7 +7,7 @@ Official PyTorch implementation of the paper:
 > **Self-supervised Learning of Event-guided Video Frame Interpolation for Rolling Shutter Frames**
 > Yunfan Lu*, Guoqiang Liang*, Yiran Shen, and Lin Wang†
 <!-- > *IEEE Transactions on Visualization and Computer Graphics (TVCG), 2025* -->
-> [PDF](link_to_final_paper_if_available) | [Project Page](#) | [Video](#)
+> [PDF](https://arxiv.org/pdf/2306.15507) | [Project Page](#) | [Video](#)
 
 ## 📌 Introduction
 
