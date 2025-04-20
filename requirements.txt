@@ -1,0 +1,12 @@
+absl-py
+Pillow
+pudb
+torch
+matplotlib
+torchvision
+PyYAML
+expecttest
+easydict
+tensorboard
+opencv-python
+pudb

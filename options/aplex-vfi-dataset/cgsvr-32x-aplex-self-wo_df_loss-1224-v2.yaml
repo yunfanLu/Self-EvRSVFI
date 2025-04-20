@@ -1,0 +1,94 @@
+JOBS: 12
+TEST_ONLY: False
+LOG_INTERVAL: 10
+TRAIN_BATCH_SIZE: 1
+VAL_BATCH_SIZE: 1
+START_EPOCH: 0
+END_EPOCH: 100
+VAL_INTERVAL: 1
+MODEL_SANING_INTERVAL: 5
+RESUME:
+  PATH:
+  TYPE:
+  SET_EPOCH: true
+LAUNCHER: "ParallelLaunch"
+SEED: 3429
+IS_CUDA: true
+OPTIMIZER:
+  NAME: "Adam"
+  LR: 0.0001
+  LR_SCHEDULER: cosine
+  end_epoch: 100
+LOSS:
+  - NAME: RollingShutterReconstructionFromRollingShutter
+    LOSS_TYPE: "l1-charbonnier"
+    WEIGHT: 0.1
+  - NAME: RollingShutterReconstructionFromGlobalShutter
+    LOSS_TYPE: "l1-charbonnier"
+    WEIGHT: 1
+METRICS:
+  - NAME: RollingShutterReconstructionFromRollingShutterPSNR
+  - NAME: RollingShutterReconstructionFromGlobalShutterPSNR
+  - NAME: RollingShutterReconstructionFromGlobalShutterSSIM
+  - NAME: RollingShutterReconstructionFromRollingShutterSSIM
+DATASET:
+  NAME: aplex_vfi_dataset
+  alpx_vfi_root: /mnt/dev-ssd-8T/yunfanlu/workspace/dataset/0-ALPEX-Real-World-Dataset/iccv23-vfi-dataset/
+  random_crop_resolution: [1224,1530]
+  moments: 50
+  low_resolution: [256, 320]
+  is_test: true
+MODEL:
+  NAME: CGSVR
+  events_moments: 50
+  image_count: 2
+  image_high: 256
+  image_width: 320
+  e_raft_in_channels: 5
+  invert_event_in_raft_flow_and_fusion: ONE-FLOW
+  e_raft_pretrained: false
+  time_bin_size: 10
+  erfat_iter: 12
+  rs_timestamps: [ [ 0, 0.5 ], [ 0.5, 1 ] ]
+  gs_timestamps: [
+    0.25,
+    0.265625,
+    0.28125,
+    0.296875,
+    0.3125,
+    0.328125,
+    0.34375,
+    0.359375,
+    0.375,
+    0.390625,
+    0.40625,
+    0.421875,
+    0.4375,
+    0.453125,
+    0.46875,
+    0.484375,
+    0.5,
+    0.515625,
+    0.53125,
+    0.546875,
+    0.5625,
+    0.578125,
+    0.59375,
+    0.609375,
+    0.625,
+    0.640625,
+    0.65625,
+    0.671875,
+    0.6875,
+    0.703125,
+    0.71875,
+    0.734375,
+    0.75
+  ]
+  mask_high_sample_count: 50
+  mask_time_sample_count: 100
+  intermediate_visualization: true
+VISUALIZATION:
+  folder: ./visualization-0210-v1
+  tag: 0210
+  intermediate_visualization: false

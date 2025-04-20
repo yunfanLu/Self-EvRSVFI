@@ -1,0 +1,75 @@
+JOBS: 16
+TEST_ONLY: False
+LOG_INTERVAL: 10
+TRAIN_BATCH_SIZE: 1
+VAL_BATCH_SIZE: 1
+START_EPOCH: 0
+END_EPOCH: 100
+VAL_INTERVAL: 1
+MODEL_SANING_INTERVAL: 5
+RESUME:
+  PATH:
+  TYPE:
+  SET_EPOCH: true
+LAUNCHER: "ParallelLaunch"
+SEED: 3429
+IS_CUDA: true
+OPTIMIZER:
+  NAME: "Adam"
+  LR: 0.0001
+  LR_SCHEDULER: cosine
+  end_epoch: 100
+LOSS:
+  -
+    NAME: RollingShutterReconstructionFromRollingShutter
+    LOSS_TYPE: "l1-charbonnier"
+    WEIGHT: 0.1
+  -
+    NAME: RollingShutterReconstructionFromGlobalShutter
+    LOSS_TYPE: "l1-charbonnier"
+    WEIGHT: 1
+  -
+    NAME: DisplacementFieldLoss
+    WEIGHT: 0.1
+METRICS:
+  -
+    NAME: GlobalShutterReconstructionPSNR
+  -
+    NAME: GlobalShutterReconstructionSSIM
+  -
+    NAME: GlobalShutterReconstructionLPIPS
+  -
+    NAME: RollingShutterReconstructionFromRollingShutterPSNR
+  -
+    NAME: RollingShutterReconstructionFromGlobalShutterPSNR
+  -
+    NAME: RollingShutterReconstructionFromGlobalShutterSSIM
+  -
+    NAME: RollingShutterReconstructionFromRollingShutterSSIM
+DATASET:
+  NAME: get_8x_frame_interpolate_9_frame
+  root: ./dataset/3-10000fps-videos/1-Videos-EvNurall/
+  sample_step: 130
+  events_moment_count: 90
+  center_cropped_height: 256
+  random_cropped_width: 320
+MODEL:
+  NAME: CGSVR
+  events_moments: 90
+  image_count: 2
+  image_high: 256
+  image_width: 320
+  e_raft_in_channels: 15
+  invert_event_in_raft_flow_and_fusion: ONE-FLOW
+  e_raft_pretrained: true
+  time_bin_size: 6
+  erfat_iter: 12
+  rs_timestamps: [[0, 0.5], [0.5, 1]]
+  gs_timestamps: [0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75]
+  mask_high_sample_count: 50
+  mask_time_sample_count: 100
+  intermediate_visualization: false
+VISUALIZATION:
+  folder: ./visualization-0210-v1
+  tag: 0210
+  intermediate_visualization: false
