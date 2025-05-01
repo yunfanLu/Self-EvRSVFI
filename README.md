@@ -7,7 +7,7 @@ Official PyTorch implementation of the paper:
 > **Self-supervised Learning of Event-guided Video Frame Interpolation for Rolling Shutter Frames**
 > Yunfan Lu*, Guoqiang Liang*, Yiran Shen, and Lin Wang†
 <!-- > *IEEE Transactions on Visualization and Computer Graphics (TVCG), 2025* -->
-> [PDF](https://arxiv.org/pdf/2306.15507) | [Project Page](#) | [Video](#)
+> [PDF](https://arxiv.org/pdf/2306.15507) | [Video](#)
 
 ## 📌 Introduction
 
@@ -53,6 +53,7 @@ We support the following datasets:
 - **Fastec-RS** (simulated GS + event + RS)
 - **Gev-RS** (high-speed GS, simulate RS and events)
 - **ERS** (real-world RS-event dataset, collected with ALPIX-Eiger)
+   - Link: https://pan.baidu.com/s/1UBDBnUZp8CxS9nCz5jyUcw Key: tvcg    
 
 Each dataset has its own dataloader in `egvfi/datasets`. Please follow the instructions in `egvfi/datasets/README.md` (add if not exists) to prepare data and annotations.
 
